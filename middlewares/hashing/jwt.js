@@ -2,7 +2,9 @@
 
 const jwt = require("jsonwebtoken");
 const joiError = require("../../middlewares/Errors/joi-error");
-const {HttpError} = require("../../middlewares/errors/http-error");
+const { HttpError } = require("../errors/http-error");
+
+
 
 
 
