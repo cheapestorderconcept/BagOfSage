@@ -1,6 +1,6 @@
 const joi = require('joi');
 const { HttpError } = require('../../../middlewares/errors/http-error');
-const joiError = require('../../../middlewares/Errors/joi-error');
+const joiError = require('../../../middlewares/errors/joi-error');
 const { httpResponse } = require('../../../middlewares/http/http-response');
 const { Shipping } = require('../../../model/User/shipping-address');
 

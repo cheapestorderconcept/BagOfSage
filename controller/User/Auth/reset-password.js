@@ -2,12 +2,13 @@
 
 const joi = require('joi');
 const { HttpError } = require('../../../middlewares/errors/http-error');
-const joiError = require('../../../middlewares/Errors/joi-error');
+const joiError = require('../../../middlewares/errors/joi-error');
 const { hashingData } = require('../../../middlewares/hashing/password-hashing');
 const { httpResponse } = require('../../../middlewares/http/http-response');
 const {sendEmail} = require('../../../middlewares/sendGridEmail/email-config');
 const { passReset } = require('../../../model/User/password-reset');
 const { User } = require('../../../model/User/user');
+
 
 const verification = joi.object({
     email: joi.string()
