@@ -3,13 +3,14 @@ const express = require('express');
 const res = require('express/lib/response');
 const { databaseAuthentication } = require('./config/database');
 const app = express();
-
+const cors = require('cors');
 
 const appRouter = require('./routes/routes');
 
 const adminRoutes = require('./routes/admin-routes');
 
 app.use(express.json());
+app.use(cors());
 app.use('/api/v1/admin/',adminRoutes)
 app.use('/api/v1/', appRouter)
 
