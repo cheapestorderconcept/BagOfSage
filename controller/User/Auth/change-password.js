@@ -1,10 +1,11 @@
 
 const joi = require('joi');
 const { HttpError } = require('../../../middlewares/errors/http-error');
-const joiError = require('../../../middlewares/Errors/joi-error');
+const joiError = require('../../../middlewares/errors/joi-error');
 const { compareHash, hashingData } = require('../../../middlewares/hashing/password-hashing');
 const { httpResponse } = require('../../../middlewares/http/http-response');
 const { User } = require('../../../model/User/user');
+
 
 const validation = joi.object({
     old_password: joi.string().required(),
