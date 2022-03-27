@@ -34,6 +34,6 @@ console.log('database connected');
 app.use((req,res)=>{
   res.status(404).json({responseMessage: 'The routes you requested does not exists on this server. Check routes or your request method'})
 })
-app.listen(4000,()=>{
+app.listen(process.env.PORT||4000,()=>{
   console.log('server started on port 4000');
 })
