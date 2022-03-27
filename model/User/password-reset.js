@@ -8,7 +8,6 @@ const resetSchema = new schema({
     createdAt:{type:Date}
 })
 
-
 resetSchema.statics.savePassCode = async function savePassCode(code) {
     const s = new passReset(code);
     const e = s.save();
