@@ -12,7 +12,7 @@ const { productModel } = require('../../../../model/product');
 const validation = joi.object({
     product_name: joi.string().required(),
     product_pictures: joi.array(),
-    product_price: joi.number().required(),
+    product_price: joi.string().required(),
     product_description: joi.string().required(),
     color: joi.array().required(),
     size: joi.array().required(),

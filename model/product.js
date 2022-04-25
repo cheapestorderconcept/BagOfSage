@@ -1,4 +1,5 @@
 
+const { boolean } = require('joi');
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
@@ -14,7 +15,7 @@ const productSchema = new schema({
     product_reviews: [],
     product_quantity: {type:Number, default:0},
     product_pictures: {type:[], required: true},
-    flash_sales: {type:String, required:true}
+    flash_sales: {type:Boolean, default:false}
 },{
     timestamps:true
 });

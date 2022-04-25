@@ -5,11 +5,15 @@ const { httpResponse } = require('../../../middlewares/http/http-response');
 const { Shipping } = require('../../../model/User/shipping-address');
 
 const val = joi.object({
-    reciever_phone_number : joi.string().required(),
-        reciever_name: joi.string().required(),
-        country: joi.string().required(),
-        address: joi.string().required(),
-        postal_code: joi.string().required()
+    phone_number : joi.string().required(),
+    first_name: joi.string(),
+    last_name: joi.string(),
+    address_line_one: joi.string().required(),
+    address_line_two: joi.any(),
+    city: joi.any(),
+    zip_code: joi.string(),
+    is_default: joi.bool(),
+    country: joi.string().required()
 })
 
 
@@ -20,7 +24,7 @@ const addShippingInfo = async function addShippingInfo(req,res,next) {
     const {userId} = req.userData;
     const details = {
         user: userId,
-        shipping_details: bodyVal
+        ...bodyVal
     }
     const newAddress = await Shipping.addShippingAddress(details);
         if (newAddress) {
@@ -30,6 +34,7 @@ const addShippingInfo = async function addShippingInfo(req,res,next) {
         const e = new HttpError(500, 'We are unable to add your shipping address at the moment. Please contact support if persists');
         return next(e);
     } catch (error) {
+        console.log('here');
     joiError(error,next);
     }
 }

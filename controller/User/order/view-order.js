@@ -17,7 +17,7 @@ const myOrder = async function myOrder(req,res,next) {
             placedOrder = await orderModel.userGetOrder(userId);
         }
         if (placedOrder&&placedOrder.length>0) {
-            httpResponse({status_code:200, response_message:'Order Placed List', data: {placedOrder}})
+            httpResponse({status_code:200, response_message:'Order Placed List', data: {placedOrder},res});
             return;
         }
         const e = new HttpError(404, 'You have no  order in this category.');

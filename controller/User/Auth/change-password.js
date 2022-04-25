@@ -10,7 +10,7 @@ const { User } = require('../../../model/User/user');
 const validation = joi.object({
     old_password: joi.string().required(),
     new_password: joi.string().required(),
-    confirm_new_password: joi.string()
+    confirm_password: joi.string()
 })
 
 const changePassword = async function changePassword(req,res,next) {

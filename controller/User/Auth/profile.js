@@ -22,6 +22,22 @@ const profile = async function profile(req,res,next) {
     }
 }
 
+const deleteProfile = async function deleteProfile(req,res,next) {
+    try {
+        const {userId} = req.userData;
+        const user = await User.deleteUser(userId);
+        if (condition) {
+         httpResponse({status_code:200, response_message:'Your account has been successfully deleted', data:{user},res});
+        }else{
+         const e = new HttpError(500, 'We are unable to delete your account at the moment. Please contact support');
+         return next(e);  
+        }
+    } catch (error) {
+        
+    }
+}
+
 module.exports={
-    profile
+    profile,
+    deleteProfile
 }

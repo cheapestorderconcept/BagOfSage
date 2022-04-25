@@ -10,13 +10,18 @@ const { User } = require('../../../model/User/user');
 const bodyValidation = joi.object({
     email: joi.string().email(),
     password: joi.string(),
-    first_name: joi.string(),
-    last_name: joi.string()
+    first_name: joi.string().required(),
+    last_name: joi.string().required()
 })
 
 const registerUser = async function registerUser(req,res,next) {
     try {
         const validation = await bodyValidation.validateAsync(req.body);
+        const existingUser = await User.findUserByEmail(validation.email);
+        if (existingUser) {
+            const e = new HttpError(400, 'An account already exists with this email address');
+            return next(e);
+        }
         const hashedPassword = await hashingData({dataToHash: validation.password});
         const data = {
             password: hashedPassword,

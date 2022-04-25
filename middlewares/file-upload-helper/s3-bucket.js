@@ -1,12 +1,17 @@
 
 const s3 = require('aws-sdk/clients/s3');
-const HttpError = require('../apiErrorResponseHelper');
+
+
 const path = require('path');
+const { HttpError } = require('../errors/http-error');
 
 const s3Config = new s3({
-    region: process.env.AWS_REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    endpoint: process.env.STORJ_GATEWAY,
+    httpOptions: { timeout: 0,  },
+    s3ForcePathStyle: true,
+    signatureVersion: "v4",
 
 });
 

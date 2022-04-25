@@ -42,7 +42,27 @@ const userGetSingleProduct = async function userGetSingleProduct(req,res,next) {
     }
 }
 
+
+const flashSalesProduct = async function flashSalesProduct(req,res,next) {   
+    try {
+     
+       const  product = await  productModel.getProduct();
+        const flash_sales = product.filter(product=>product.flash_sales==true);
+        if (product&&product.length>0) {
+            httpResponse({status_code:200, response_message:'Product available', data:{product:flash_sales}, res});
+        }else{
+            httpResponse({status_code:200, response_message:'Product available', data:{flash_sales}, res});
+        }
+    } catch (error) {
+        console.log(error);
+        const e = new HttpError(500, 'A system error has occured. Please contact support if persists');
+        return next(e);
+    }
+}
+
+
 module.exports={
     userGetAllProduct,
-    userGetSingleProduct
+    userGetSingleProduct,
+    flashSalesProduct
 }

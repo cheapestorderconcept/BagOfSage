@@ -7,8 +7,11 @@ const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
 const AWS_REGION = process.env.AWS_REGION;
 const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY
 
+//
+
 const fetchImageFromServer=(req,res,next)=>{
     try {
+        console.log('downloading-image');
         const {image_key, bucket_name} = req.params;
         const downloadedImage = downloadS3UploadedFile({imageKey:image_key, bucketName:bucket_name});
         if(downloadedImage){
@@ -23,13 +26,13 @@ const fetchImageFromServer=(req,res,next)=>{
 
 const uploadFileToServer=async(req,res,next)=>{
     try {
-        
+        console.log(req.file);
         const file = req.file;
         const {bucket_name}=req.params;
         if(!file)return next(new HttpError(400, 'Please select a picture to be uploaded'));
         if(!bucket_name)return next(new HttpError(400, 'Please provide a bucketName'));
         const uploadedFile = await amazonS3FileUpload({file,AWS_ACCESS_KEY_ID,AWS_BUCKET_NAME:bucket_name,AWS_REGION,AWS_SECRET_ACCESS_KEY});
-        httpResponse(200,'Image successfully uploaded',uploadedFile,res); 
+        httpResponse({status_code: 200, response_message: 'Image successfully uploaded',data: uploadedFile,res}); 
     } catch (error) {
         console.log(error);
        const err = new HttpError(500,'Product picture not successfully uploaded');

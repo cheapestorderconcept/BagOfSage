@@ -11,15 +11,16 @@ const orderStatus = {
 }
 
 const orderSchema = new schema({
-    product: {type:mongoose.Types.ObjectId, ref:'product'},
     total_price: {type: Number, required:true},
     user: {type:mongoose.Types.ObjectId, ref:'user', required:true},
     order_status: {type:String, default: orderStatus.pending},
-    product_description: {type: Array},
+    product_name: {type:String},
+    product_image: {type:String},
+    product_color: {type:String},
+    product_size: {type:String},
     shipping_tracking_number: {type: String, },
     shipping_address: {type:{}, required:true},
     quantity: {type:Number, required:true},
-    flash_sales: {type:Boolean, required:true}
 },{
     timestamps:true
 });
